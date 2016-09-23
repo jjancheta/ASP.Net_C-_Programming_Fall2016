@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Assignment3.Controllers.TrackBase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tracks List (@ViewContext.RouteData.GetRequiredString("action"))</h2>
+
+<p>
+   @Html.ActionLink("All tracks", "Index", "Tracks") |
+   @Html.ActionLink("Pop tracks", "AllPop", "Tracks") |
+   @Html.ActionLink("John Lord (Deep Purple) tracks", "DeepPurple", "Tracks") |
+   @Html.ActionLink("Longest tracks", "LongestTrack", "Tracks")    
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlbumId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MediaTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Composer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Milliseconds)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bytes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlbumId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GenreId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Composer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Milliseconds)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bytes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+       @* <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+}
+
+</table>
