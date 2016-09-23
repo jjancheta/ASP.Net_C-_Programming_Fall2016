@@ -1,0 +1,56 @@
+﻿@model Assignment1.Controllers.PhoneBase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Phone Specification</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manufacturer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateReleased)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateReleased)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MSRP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MSRP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScreenSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScreenSize)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

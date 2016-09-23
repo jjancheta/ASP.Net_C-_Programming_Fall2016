@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ASSIGNMENT 2</h1>
+    <p class="lead">This web application shows how to display data (GetAll, GetOne) from the database and add new data to the database using manager and automapper classes.</p>
+    <p><a href="https://scs.senecac.on.ca/~wei.song/int422/assignments/INT422-Assignment2.html" target ="_blank" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>List of Employees</h2>
+        <p>
+            This will show the list of all employees stored in the database. 
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Employees")">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Employee Detail</h2>
+        <p>This will show details of one employee from the database.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Details","Employees", new { id = 1 })">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Add New Employee</h2>
+        <p>Allows the user to add new employee to the database.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Create","Employees")">Learn more &raquo;</a></p>
+    </div>
+</div>
