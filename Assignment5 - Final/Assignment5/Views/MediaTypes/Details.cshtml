@@ -1,0 +1,30 @@
+﻿@model Assignment5.Controllers.MediaTypeBase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Media Type Details</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MediaTypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediaTypeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Assignment5.Controllers.AlbumBase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Albums</h2>
+<br/>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtistName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtistName)
+        </td>
+        <td>
+            
+            @Html.ActionLink("Details", "Details", new { id=item.AlbumId }) 
+           
+        </td>
+    </tr>
+}
+
+</table>
