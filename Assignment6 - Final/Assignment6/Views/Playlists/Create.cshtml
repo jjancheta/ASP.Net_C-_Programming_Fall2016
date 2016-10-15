@@ -1,0 +1,48 @@
+﻿@model Assignment6.Controllers.PlaylistWithTracksAddForm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add new playlist</h2>
+<p>
+    Enter playlist name, select tracks and click the submit button.
+</p>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <hr />
+         
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @autofocus="autofocos"} })                  
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TracksList, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 checkbox">
+                    @foreach (var item in Model.TracksList)
+                    {
+                        <label><input type="checkbox" name="TrackIds" value="@item.Value" />@item.Text </label><br />
+                    }
+                </div>
+            </div>    
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-success" /> 
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
