@@ -1,0 +1,88 @@
+﻿@model Assignment9.Controllers.AlbumWithDetails
+
+@{
+    ViewBag.Title = "Details";
+    var userAccount = new Assignment9.Controllers.UserAccount(User as System.Security.Claims.ClaimsPrincipal);
+}
+
+<h2>Album details - @Model.Name</h2>
+
+@if (userAccount.HasRoleClaim("Clerk"))
+{
+    <p>@Html.ActionLink("Create new track", "TrackAdd", new { id = Model.Id }, new { @class = "btn btn-success" })</p>
+}
+
+@if (userAccount.HasRoleClaim("Coordinator"))
+{
+    <span>
+        @Html.ActionLink("Edit album", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+       @Html.ActionLink("Delete album", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+</span>
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlAlbum)
+        </dt>
+
+        <dd>
+            <img src="@Model.UrlAlbum" alt="artist_photo" width="150" height="150" />
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+            <hr />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            <div class="panel panel-default panel-body">
+                @Html.Raw(Model.Description)
+            </div>
+        </dd>
+
+        @* TRACKS ITEMS *@
+        <dt>
+            @Html.DisplayNameFor(model => model.Tracks)
+            <span class="badge"> @Html.DisplayFor(model => model.TracksCount) </span>
+        </dt>
+        <dd>
+            @foreach (var a in Model.Tracks)
+            {
+                @Html.ActionLink(a.Name, "Details", "Tracks", new { id = a.Id }, null) <br />
+            }
+            <hr />
+        </dd>      
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("List of Artists", "Index", "Artists", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("List of Albums", "Index", "Albums", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("List of Tracks", "Index", "Tracks", null, new { @class = "btn btn-info" })
+</p>

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h2>Load Initial Data</h2>
+            @Html.ActionLink("Roles", "RoleClaim") | 
+            @Html.ActionLink("Genres", "Genre") | 
+            @Html.ActionLink("Artists", "Artist") | 
+            @Html.ActionLink("Albums", "Album") | 
+            @Html.ActionLink("Tracks", "Track") 
+
+            <h2>Remove Data</h2>
+            @Html.ActionLink("Roles", "RemoveRoleClaim") |
+            @Html.ActionLink("Genres", "RemoveGenre") |
+            @Html.ActionLink("Artists", "RemoveArtist") |
+            @Html.ActionLink("Albums", "RemoveAlbum") |
+            @Html.ActionLink("Tracks", "RemoveTrack")
+
+            <h2>Delete Database</h2>
+            <p class="text-danger">WARNING: The link will delete the whole database!!!</p>
+            <p>@Html.ActionLink("Delete database", "RemoveDatabase")</p>
+    </div>
+</div>

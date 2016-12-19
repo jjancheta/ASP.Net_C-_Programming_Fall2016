@@ -1,0 +1,173 @@
+﻿@model Assignment9.Controllers.ArtistWithDetails
+
+@{
+    ViewBag.Title = "Details";
+    var userAccount = new Assignment9.Controllers.UserAccount(User as System.Security.Claims.ClaimsPrincipal);
+}
+
+<h2>Artist details - @Model.Name</h2>
+
+@if (userAccount.HasRoleClaim("Coordinator"))
+{
+    <p>
+        @Html.ActionLink("Create new album", "AlbumAdd", new { id = Model.Id}, new { @class = "btn btn-primary" })      
+    </p>
+}
+
+@if (userAccount.HasRoleClaim("Executive"))
+{
+    <p>
+        @Html.ActionLink("Edit artist", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete artist", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Add new media", "MediaItemAdd", new { id = Model.Id }, new { @class = "btn btn-success" })
+    </p>
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr/>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthName)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthOrStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthOrStartDate)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlArtist)
+        </dt>
+
+        <dd>
+            <img src="@Model.UrlArtist" alt="artist_photo" width="150" height="150" />
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profile)
+        </dt>
+
+        <dd>
+            <div class="panel panel-default panel-body">
+                @Html.Raw(Model.Profile)
+            </div>
+            <br/>
+        </dd>
+
+        @* ALBUM ITEMS *@
+        <dt>
+            @Html.DisplayNameFor(model => model.Albums)
+            <span class="badge"> @Html.DisplayFor(model => model.AlbumsCount) </span>
+        </dt>
+        <dd>
+            @foreach (var a in Model.Albums)
+            {
+                @Html.ActionLink(a.Name, "Details", "Albums", new { id = a.Id }, null) <br />
+            }
+            <hr/>
+        </dd>
+
+        @*  MEDIA ITEMS   *@
+        <dt>
+            Photos
+        </dt>
+        <dd>
+            @foreach (var item in Model.MediaItems.Where(m => m.ContentType.Contains("image/")))
+            {
+                <div>
+                    <span>@item.Caption</span><br>
+                    <img src="~/mediaItem/@item.StringId" alt="@item.Caption" title="@item.Caption" width="200" class="img-responsive img-rounded"><br />
+                </div>
+            }
+            <hr/>
+        </dd>
+
+        <dt>
+            Audio Clips
+        </dt>
+        <dd>
+            @foreach (var item in Model.MediaItems.Where(m => m.ContentType.Contains("audio/")))
+            {
+                <div>
+                    <span>@item.Caption</span><br>
+                    <audio controls="controls">
+                        <source src="~/mediaItem/@item.StringId" type="audio/mpeg">
+                        <source src="~/mediaItem/@item.StringId" type="audio/ogg">
+                        <source src="~/mediaItem/@item.StringId" type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            }
+            <hr/>
+         </dd>
+        <dt>
+            Documents
+        </dt>
+        <dd>
+            @foreach (var item in Model.MediaItems.Where(m => m.ContentType.Contains("application/")))
+            {
+                <div>
+                    <span>@item.Caption</span><br>
+                    <a href="~/mediaItem/@item.StringId/download">
+
+                        @if (item.ContentType.Contains("presentationml.presentation"))
+                        {
+                            <img src="~/Icons/PowerPoint-icon.png" alt="" height="120" width="120">
+                        }
+
+                        else if (item.ContentType.Contains("spreadsheetml.sheet"))
+                        {
+                            <img src="~/Icons/Excel-icon.png" alt="" height="120" width="120">
+                        }
+
+                        else if (item.ContentType.Contains("wordprocessingml.document"))
+                        {
+                            <img src="~/Icons/Word-icon.png" alt="" height="120" width="120">
+                        }
+                        else
+                        {
+                            <img src="~/Icons/unknown-icon.png" alt="" height="120" width="120">
+                        }
+
+                    </a>
+                    <hr />
+                </div>
+            }
+            <hr/>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("List of Artists", "Index", "Artists", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("List of Albums", "Index", "Albums", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("List of Tracks", "Index", "Tracks", null, new { @class = "btn btn-info" })
+</p>

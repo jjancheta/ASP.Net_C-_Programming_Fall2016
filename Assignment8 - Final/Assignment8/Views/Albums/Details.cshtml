@@ -1,0 +1,88 @@
+﻿@model Assignment8.Controllers.AlbumWithArtistAndTrack
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Album details - @Model.Name</h2>
+<p>
+    @Html.ActionLink("Add New Track", "AddTrack", new { id = Model.Id })
+</p>
+<div class="row">
+    <hr />
+    <div class="col-md-5">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ReleaseDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UrlAlbum)
+            </dt>
+
+            <dd>
+                <img src="@Model.UrlAlbum" width="150" height="150" />
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Genre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Genre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Coordinator)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Coordinator)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Artists)
+                <span class="badge"> @Html.DisplayFor(model => model.ArtistsCount) </span>
+            </dt>
+
+            <dd>
+                @foreach (var a in Model.Artists)
+                {
+                   @Html.ActionLink(a.Name, "Details", "Artists", new { id = a.Id }, null) <br />
+                } 
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Tracks)
+                <span class="badge"> @Html.DisplayFor(model => model.TracksCount) </span>
+            </dt>
+
+            <dd>            
+                @foreach (var a in Model.Tracks)
+                {
+                  @Html.ActionLink(a.Name, "Details", "Tracks", new { id = a.Id }, null) <br />
+                 }           
+            </dd>
+        </dl>
+    </div>
+</div>
+   
+<p>
+   @Html.ActionLink("List of Artists", "Index", "Artists",null,new { @class = "btn btn-success" })
+   @Html.ActionLink("List of Albums", "Index", "Albums", null, new { @class = "btn btn-warning" })
+   @Html.ActionLink("List of Tracks", "Index", "Tracks", null, new { @class = "btn btn-info" })
+</p>

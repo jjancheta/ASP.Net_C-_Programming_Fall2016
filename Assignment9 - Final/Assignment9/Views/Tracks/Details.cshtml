@@ -1,0 +1,68 @@
+﻿@model Assignment9.Controllers.TrackBase
+
+@{
+    ViewBag.Title = "Details";
+    var userAccount = new Assignment9.Controllers.UserAccount(User as System.Security.Claims.ClaimsPrincipal);
+}
+
+<h2>Track details - @Model.Name</h2>
+@if (userAccount.HasRoleClaim("Clerk"))
+{
+    <p>
+        @Html.ActionLink("Edit track", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete track", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+    </p>
+}
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr/>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AudioUrl)
+        </dt>
+
+        <dd>
+            <audio controls="controls">
+                <source src="@Model.AudioUrl" type="audio/mpeg">
+                <source src="@Model.AudioUrl" type="audio/ogg">
+                <source src="@Model.AudioUrl" type="audio/wav">
+                Your browser does not support the audio element.
+            </audio>
+            <hr/>
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Composers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Composers)
+            <hr/>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+            <hr/>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("List of Artists", "Index", "Artists", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("List of Albums", "Index", "Albums", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("List of Tracks", "Index", "Tracks", null, new { @class = "btn btn-info" })
+</p>

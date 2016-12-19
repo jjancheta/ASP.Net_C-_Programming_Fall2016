@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Assignment8.Controllers.GenreBase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Genres</h2>
+<br/>
+<table class="table">
+    <tr class="bg-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+    </tr>
+@foreach (var item in Model) {
+    <tr class="table-hover-rows">
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+    </tr>
+}
+
+</table>

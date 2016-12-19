@@ -1,0 +1,81 @@
+﻿@model Assignment9.Controllers.AlbumWithDetails
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete album (including associated tracks)</h2>
+
+<h3 class="text-danger">Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlAlbum)
+        </dt>
+
+        <dd>
+            <img src="@Model.UrlAlbum" alt="artist_photo" width="150" height="150" />
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+            <hr />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            <div class="panel panel-default panel-body">
+                @Html.Raw(Model.Description)
+            </div>
+        </dd>
+
+        @* TRACKS ITEMS *@
+        <dt>
+            @Html.DisplayNameFor(model => model.Tracks)
+            <span class="badge"> @Html.DisplayFor(model => model.TracksCount) </span>
+        </dt>
+        <dd>
+            @foreach (var a in Model.Tracks)
+            {
+                @Html.ActionLink(a.Name, "Details", "Tracks", new { id = a.Id }, null) <br />
+            }
+            <hr />
+        </dd>      
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> 
+            @Html.ActionLink("Cancel", "Details", new { id = Model.Id }, new { @class="btn btn-default" })
+        </div>
+    }
+</div>

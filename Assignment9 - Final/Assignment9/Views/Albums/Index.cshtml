@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Assignment9.Controllers.AlbumBase>
+
+@{
+    ViewBag.Title = "Index";
+    var userAccount = new Assignment9.Controllers.UserAccount(User as System.Security.Claims.ClaimsPrincipal);
+}
+
+<h2>List of Albums</h2>
+
+<br/>
+<table class="table">
+    <tr class="bg-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th class="col-md-3 text-center">
+            @Html.DisplayNameFor(model => model.UrlAlbum)
+        </th>
+        <th  class="text-center col-md-3">
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="table-hover-rows">
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Name)*@
+            @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td class="col-md-3 text-center">
+            <img src="@item.UrlAlbum" alt="artist_photo" width="150" height="150" />
+        </td>
+        <td class="text-center col-md-3">
+            @Html.DisplayFor(modelItem => item.Genre)
+        </td>
+        <td></td>
+    </tr>
+}
+
+</table>

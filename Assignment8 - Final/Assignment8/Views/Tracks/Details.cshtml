@@ -1,0 +1,52 @@
+﻿@model Assignment8.Controllers.TrackWithDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Track details - @Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Composer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Composer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Albums)
+            <span class="badge"> @Html.DisplayFor(model => model.AlbumsCount) </span>
+        </dt>
+        <dd>
+            @foreach (var item in Model.Albums)
+            {
+                <span>@Html.ActionLink(item.Name, "Details", "Albums", new { id = item.Id },null)</span>
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-success" })
+    @Html.ActionLink("List of Tracks", "Index", "Tracks", null, new { @class = "btn btn-info" })
+</p>
