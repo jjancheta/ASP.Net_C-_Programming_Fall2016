@@ -2,5 +2,13 @@
 ASSIGNMENT9 - URL : https://janchetajr-wa2016-a9.azurewebsites.net/
 ASSIGNMENT8 - URL : https://janchetajr-wa2016-a8.azurewebsites.net/
 
-Login: admin@example.com
+Login: admin@example.com  (admin tool)
+
+Login: exec@example.com   (add Artist -> click Artist -> Create New Artist
+                           add new Album -> click Artist  -> click Artist name -> Create New Album
+                           Assignment9 with Edit option))
+
+Login: coord@example.com  (add new Track - click album -> click Album name - Add New Track
+                           Assignment9 with Edit option)
+
 Password: Password123!
